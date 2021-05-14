@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
+import javax.crypto.Cipher;
+
 /**
  * 属性分组
  *
@@ -33,6 +36,18 @@ public class AttrGroupController {
 
     @Autowired
     private AttrGroupService attrGroupService;
+
+    @GetMapping("withattrs/{catId}")
+    public ResponseVo<List<AttrGroupEntity>> queryAttrGroupListByCatId(@PathVariable("catId")Long catId){
+        List<AttrGroupEntity> attrGroupList = attrGroupService.queryAttrGroupListByCatId(catId);
+        return ResponseVo.ok(attrGroupList);
+    }
+
+    @GetMapping("category/{cid}")
+    public ResponseVo<List<AttrGroupEntity>> queryAttrGroupList(@PathVariable("cid")Long id) {
+        List<AttrGroupEntity> groupList=this.attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("category_id", id));
+        return ResponseVo.ok(groupList);
+    }
 
     /**
      * 列表

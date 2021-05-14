@@ -39,3 +39,6 @@ spring:
         discovery-client-enabled: true
         sender:
             type: web
+logging:
+    level:
+        com.atguigu.gmall.pms: debug
