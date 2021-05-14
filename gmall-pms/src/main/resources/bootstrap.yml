@@ -1,0 +1,10 @@
+spring:
+    cloud:
+        nacos:
+            config:
+                file-extension: yml
+                group: dev
+                namespace: 894ee492-78e6-473a-a515-338ebca43071
+                password: nacos
+                server-addr: localhost:8848
+                username: nacos
