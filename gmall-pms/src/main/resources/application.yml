@@ -1,6 +1,12 @@
 feign:
     sentinel:
         enabled: true
+    client:
+        config:
+            default:
+                connect-timeout: 10000
+                read-timeout: 20000
+
 mybatis-plus:
     global-config:
         db-config:
@@ -23,6 +29,10 @@ spring:
             transport:
                 dashboard: localhost:8080
                 port: 8719
+        alibaba:
+            seata:
+                tx-service-group: gmall_tx_group
+
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
         name: defaultDataSource
@@ -39,6 +49,13 @@ spring:
         discovery-client-enabled: true
         sender:
             type: web
+    rabbitmq:
+        host: 192.168.227.128
+        virtual-host: /admin
+        password: admin
+        username: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
 logging:
     level:
         com.atguigu.gmall.pms: debug

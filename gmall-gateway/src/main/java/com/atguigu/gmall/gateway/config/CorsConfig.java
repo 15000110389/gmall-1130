@@ -13,12 +13,13 @@ public class CorsConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://manager.gmall.com");
         corsConfiguration.addAllowedOrigin("http://localhost:1000");
+        corsConfiguration.addAllowedOrigin("http://api.gmall.com");
+        corsConfiguration.addAllowedOrigin("http://gmall.com");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
-
         return new CorsWebFilter(source);
     }
 }

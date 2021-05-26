@@ -9,6 +9,9 @@ spring:
       transport:
         dashboard: localhost:8080
         port: 8719
+    alibaba:
+      seata:
+        tx-service-group: gmall_tx_group
   zipkin:
     base-url: http://localhost:9411
     discovery-client-enabled: true
@@ -25,6 +28,11 @@ spring:
   redis:
     host: 192.168.227.128
 feign:
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 20000
   sentinel:
     enabled: false
 mybatis-plus:
