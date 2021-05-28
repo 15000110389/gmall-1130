@@ -1,0 +1,46 @@
+feign:
+    sentinel:
+        enabled: true
+server:
+    port: 18086
+spring:
+    application:
+        name: gmall-search
+    cloud:
+        nacos:
+            discovery:
+                namespace: public
+                password: nacos
+                server-addr: localhost:8848
+                username: nacos
+        sentinel:
+            eager: true
+            transport:
+                dashboard: localhost:8080
+                port: 8719
+    elasticsearch:
+        rest:
+            uris: http://192.168.227.128:9200
+    sleuth:
+        sampler:
+            probability: 1
+    zipkin:
+        base-url: http://localhost:9411
+        discovery-client-enabled: true
+        sender:
+            type: web
+    rabbitmq:
+        host: 192.168.227.128
+        virtual-host: /admin
+        password: admin
+        username: admin
+        listener:
+          simple:
+              prefetch: 1
+              concurrency: 4
+              acknowledge-mode: manual
+    jackson:
+        default-property-inclusion: non_null
+    jms:
+        cache:
+            enabled: false
