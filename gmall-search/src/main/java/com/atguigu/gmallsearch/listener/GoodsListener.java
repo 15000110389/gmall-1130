@@ -89,7 +89,8 @@ public class GoodsListener {
                 // 设置检索类型的规格参数
                 List<SearchAttrValue> searchAttrValues = new ArrayList<>();
                 // 销售类型的检索属性
-                ResponseVo<List<SkuAttrValueEntity>> skuSearchAttrValueResponseVo = this.pmsClient.querySearchAttrValuesBycidAndSkuId(skuEntity.getCategoryId(), skuEntity.getId());
+                ResponseVo<List<SkuAttrValueEntity>> skuSearchAttrValueResponseVo = this.pmsClient.querySearchAttrValuesByCidAndSkuId(skuEntity.getCategoryId(), skuEntity.getId());
+
                 List<SkuAttrValueEntity> skuAttrValueEntities = skuSearchAttrValueResponseVo.getData();
                 if (!CollectionUtils.isEmpty(skuAttrValueEntities)){
                     searchAttrValues.addAll(skuAttrValueEntities.stream().map(skuAttrValueEntity -> {
@@ -99,7 +100,7 @@ public class GoodsListener {
                     }).collect(Collectors.toList()));
                 }
                 // 基本类型的检索属性
-                ResponseVo<List<SpuAttrValueEntity>> spuSearchAttrValueResponseVo = this.pmsClient.querySearchAttrValuesBycidAndSpuId(skuEntity.getCategoryId(), spuEntity.getId());
+                ResponseVo<List<SpuAttrValueEntity>> spuSearchAttrValueResponseVo = this.pmsClient.querySearchAttrValuesByCidAndSpuId(skuEntity.getCategoryId(), spuEntity.getId());
                 List<SpuAttrValueEntity> spuAttrValueEntities = spuSearchAttrValueResponseVo.getData();
                 if (!CollectionUtils.isEmpty(spuAttrValueEntities)){
                     searchAttrValues.addAll(spuAttrValueEntities.stream().map(spuAttrValueEntity -> {
@@ -119,4 +120,5 @@ public class GoodsListener {
 
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
     }
+
 }

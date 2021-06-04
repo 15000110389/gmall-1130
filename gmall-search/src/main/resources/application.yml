@@ -44,3 +44,5 @@ spring:
     jms:
         cache:
             enabled: false
+    redis:
+        host: 192.168.227.128

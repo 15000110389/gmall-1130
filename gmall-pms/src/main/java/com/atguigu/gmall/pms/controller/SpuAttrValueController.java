@@ -37,7 +37,7 @@ public class SpuAttrValueController {
 
 
     @GetMapping("search/{cid}")
-    public ResponseVo<List<SpuAttrValueEntity>> querySearchAttrValuesBycidAndSpuId(
+    public ResponseVo<List<SpuAttrValueEntity>> querySearchAttrValuesByCidAndSpuId(
             @PathVariable("cid")Long cid, @RequestParam("spuId")Long spuId
     ){
         List<SpuAttrValueEntity> spuAttrValueList=this.spuAttrValueService.querySearchAttrValuesByCidAndSpuId(cid, spuId);

@@ -5,6 +5,7 @@ import java.util.List;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,14 +34,19 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+    @GetMapping("all/{cid}")
+    public ResponseVo<List<CategoryEntity>> queryLvl123CatesByCid3(@PathVariable("cid") Long cid){
+        List<CategoryEntity> categoryList=categoryService.queryCatesByCid3(cid);
+        return ResponseVo.ok(categoryList);
+    }
 
     @GetMapping("subs/{pid}")
-    public ResponseVo<List<CategoryEntity>> queryCategory(@PathVariable("pid")Long pid){
+    public ResponseVo<List<CategoryEntity>> queryLvl2WithSubByPid(@PathVariable("pid")Long pid){
         List<CategoryEntity> categoryList=this.categoryService.queryCategory(pid);
         return ResponseVo.ok(categoryList);
     }
     @GetMapping("parent/{parentId}")
-    public ResponseVo<List<CategoryEntity>> queryCategoryList(@PathVariable("parentId")Long pid) {
+    public ResponseVo<List<CategoryEntity>> queryCategoriesByPid(@PathVariable("parentId")Long pid) {
         List<CategoryEntity> categoryList=this.categoryService.queryCategoryList(pid);
         return ResponseVo.ok(categoryList);
     }

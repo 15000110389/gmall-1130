@@ -2,6 +2,7 @@ package com.atguigu.gmall.index.service;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.gmall.common.bean.ResponseVo;
+import com.atguigu.gmall.index.config.BloomFilterConfig;
 import com.atguigu.gmall.index.config.GmallCache;
 import com.atguigu.gmall.index.feign.GmallPmsClient;
 import com.atguigu.gmall.index.utils.DistributedLock;
@@ -67,11 +68,10 @@ public class IndexService {
     }
 
     @GmallCache(prefix = KEY_PREFIX,timeout = 129600,random =14400,lock = LOCK_PREFIX)
-    @Transactional
     public List<CategoryEntity> queryLv3(Long pid) {
-            ResponseVo<List<CategoryEntity>> listResponseVo = this.pmsClient.queryCategory(pid);
-            List<CategoryEntity> data = listResponseVo.getData();
-            return data;
+        ResponseVo<List<CategoryEntity>> listResponseVo = this.pmsClient.queryCategory(pid);
+        List<CategoryEntity> data = listResponseVo.getData();
+        return data;
     }
 
     public void test() {
@@ -133,4 +133,7 @@ public class IndexService {
             this.stringRedisTemplate.opsForValue().set("num",String.valueOf(++i));
         lock.unlock();
         }
+
+
     }
+

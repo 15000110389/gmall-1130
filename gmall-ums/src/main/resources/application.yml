@@ -1,0 +1,49 @@
+feign:
+    sentinel:
+        enabled: true
+mybatis-plus:
+    global-config:
+        db-config:
+            id-type: auto
+    mapper-locations: classpath:mapper/ums/*.xml
+    type-aliases-package: com.atguigu.gmall.ums.entity
+server:
+    port: 18084
+spring:
+    application:
+        name: ums-service
+    cloud:
+        nacos:
+            discovery:
+                password: nacos
+                server-addr: localhost:8848
+                username: nacos
+        sentinel:
+            eager: true
+            transport:
+                dashboard: localhost:8080
+                port: 8719
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        name: defaultDataSource
+        password: root
+        url: jdbc:mysql://localhost:3306/guli_ums?serverTimezone=UTC
+        username: root
+    redis:
+        host: 192.168.227.128
+    sleuth:
+        sampler:
+            probability: 1
+    zipkin:
+        base-url: http://localhost:9411
+        discovery-client-enabled: true
+        sender:
+            type: web
+    rabbitmq:
+        host: 192.168.227.128
+        port: 5672
+        virtual-host: /admin
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated # SIMPLE-同步确认（阻塞） CORRELATED-异步确认
+        publisher-returns: true # 确认消息是否到达队列

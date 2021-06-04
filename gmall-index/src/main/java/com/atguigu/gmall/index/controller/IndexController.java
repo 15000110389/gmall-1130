@@ -25,7 +25,7 @@ public class IndexController {
     @GetMapping("index/cates/{pid}")
     @ResponseBody
     public ResponseVo<List<CategoryEntity>> queryLv2(@PathVariable("pid")Long pid) {
-        List<CategoryEntity> categoryEntities=this.indexService.queryLv2(pid);
+        List<CategoryEntity> categoryEntities=this.indexService.queryLv3(pid);
         return  ResponseVo.ok(categoryEntities);
     }
 
