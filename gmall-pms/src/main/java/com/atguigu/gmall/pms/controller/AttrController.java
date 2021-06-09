@@ -5,7 +5,6 @@ import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +19,8 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
+import javax.annotation.Resource;
+
 /**
  * 商品属性
  *
@@ -32,7 +33,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 @RequestMapping("pms/attr")
 public class AttrController {
 
-    @Autowired
+    @Resource
     private AttrService attrService;
 
     @GetMapping("category/{cid}")

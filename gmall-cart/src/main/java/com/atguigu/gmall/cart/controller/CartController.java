@@ -16,6 +16,13 @@ import java.util.List;
 public class CartController {
     @Resource
     private CartService cartService;
+
+    @GetMapping("user/{userId}")
+    @ResponseBody
+    public ResponseVo<List<Cart>> queryCheckedCartsByUserId(@PathVariable("userId")Long userId){
+        List<Cart> cartList=cartService.queryCheckedCartsByUserId(userId);
+        return ResponseVo.ok(cartList);
+    }
 //    @Resource
 //    private LoginInterceptor loginInterceptor;
     @GetMapping("test")

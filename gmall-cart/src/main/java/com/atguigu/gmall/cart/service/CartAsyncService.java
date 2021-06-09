@@ -17,7 +17,7 @@ public class CartAsyncService {
         this.cartMapper.update(cart, new UpdateWrapper<Cart>().eq("user_id", userId).eq("sku_id", skuId));
     }
     @Async
-    public void insert(Cart cart) {
+    public void insert(String userId,Cart cart) {
         this.cartMapper.insert(cart);
     }
     @Async

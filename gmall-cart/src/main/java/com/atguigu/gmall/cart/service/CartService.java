@@ -83,7 +83,7 @@ public class CartService {
             ResponseVo<List<ItemSaleVo>> salesResponseVo = smsClient.querySaleListBySkuId(cart.getSkuId());
             List<ItemSaleVo> itemSaleVos = salesResponseVo.getData();
             cart.setSales(JSON.toJSONString(itemSaleVos));
-            this.cartAsyncService.insert(cart);
+            this.cartAsyncService.insert(userId, cart);
         }
 
         hashOps.put(skuId, JSON.toJSONString(cart));
@@ -147,7 +147,7 @@ public class CartService {
                     cartAsyncService.update(cart,userId.toString(),skuId);
                 }else {
                     cart.setUserId(userId.toString());
-                    cartAsyncService.insert(cart);
+                    cartAsyncService.insert(userId.toString(), cart);
                 }
                 LoginHashOps.put(skuId,JSON.toJSONString(cart));
             });
@@ -198,5 +198,15 @@ public class CartService {
         BoundHashOperations<String, Object, Object> hashOps = stringRedisTemplate.boundHashOps(KEY_PREFIX + userId);
         hashOps.delete(skuId.toString());
         cartAsyncService.deleteByUserIdAndSkuId(userId, skuId);
+    }
+
+    public List<Cart> queryCheckedCartsByUserId(Long userId) {
+        BoundHashOperations<String, Object, Object> hashOps = stringRedisTemplate.boundHashOps(KEY_PREFIX + userId);
+        List<Object> cartJsons = hashOps.values();
+        if (CollectionUtils.isEmpty(cartJsons)){
+            return null;
+        }
+        return cartJsons.stream().map(cart->JSON.parseObject(cart.toString(),Cart.class)).filter(Cart::getCheck).collect(Collectors.toList());
+//        return cartJsons.stream().map(cart->JSON.parseObject(cartJson.toString(), Cart.class)).filter(Cart::getCheck).collect(Collectors.toList());
     }
 }

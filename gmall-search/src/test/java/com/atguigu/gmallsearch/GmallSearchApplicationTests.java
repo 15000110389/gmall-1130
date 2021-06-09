@@ -3,12 +3,13 @@ package com.atguigu.gmallsearch;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.pms.entity.*;
+import com.atguigu.gmall.search.feign.GmallPmsClient;
+import com.atguigu.gmall.search.feign.GmallWmsClient;
+import com.atguigu.gmall.search.pojo.Goods;
+import com.atguigu.gmall.search.pojo.SearchAttrValue;
+import com.atguigu.gmall.search.repository.GoodsRepository;
 import com.atguigu.gmall.wms.entity.WareSkuEntity;
-import com.atguigu.gmallsearch.feign.GmallPmsClient;
-import com.atguigu.gmallsearch.feign.GmallWmsClient;
-import com.atguigu.gmallsearch.pojo.Goods;
-import com.atguigu.gmallsearch.pojo.SearchAttrValue;
-import com.atguigu.gmallsearch.repository.GoodsRepository;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @SpringBootTest
 class GmallSearchApplicationTests {
     @Resource
-    GoodsRepository repository;
+    GoodsRepository goodsRepository;
     @Resource
     ElasticsearchRestTemplate restTemplate;
     @Resource
@@ -109,7 +110,7 @@ class GmallSearchApplicationTests {
                         return goods;
                     }).collect(Collectors.toList());
 
-                    this.repository.saveAll(goodsList);
+                    this.goodsRepository.saveAll(goodsList);
                 }
             });
 
